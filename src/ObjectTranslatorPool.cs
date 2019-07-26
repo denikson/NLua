@@ -1,23 +1,33 @@
-using System;
-using System.Collections.Concurrent;
-
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using LuaState = KeraLua.Lua;
 
 namespace NLua
 {
+
     internal class ObjectTranslatorPool
     {
         private static volatile ObjectTranslatorPool _instance = new ObjectTranslatorPool();
 
-        private ConcurrentDictionary<LuaState, ObjectTranslator> translators = new ConcurrentDictionary<LuaState, ObjectTranslator>();
+        private Dictionary<LuaState, ObjectTranslator> translators = new Dictionary<LuaState, ObjectTranslator>();
 
         public static ObjectTranslatorPool Instance => _instance;
 
 
         public void Add(LuaState luaState, ObjectTranslator translator)
         {
-            if(!translators.TryAdd(luaState, translator))
-                throw new ArgumentException("An item with the same key has already been added. ", "luaState");
+            lock (translators)
+            {
+                try
+                {
+                    translators.Add(luaState, translator);
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException("An item with the same key has already been added. ", "luaState");
+                }
+            }
         }
 
         public ObjectTranslator Find(LuaState luaState)
@@ -36,8 +46,8 @@ namespace NLua
 
         public void Remove(LuaState luaState)
         {
-            ObjectTranslator translator;
-            translators.TryRemove(luaState, out translator);
+            lock (translators)
+                translators.Remove(luaState);
         }
     }
 }

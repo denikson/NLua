@@ -305,7 +305,7 @@ namespace NLua
         {
             int depth = luaState.GetTop();
 
-            Debug.WriteLine("lua stack depth: {0}", depth);
+            Debug.WriteLine($"lua stack depth: {depth}");
 
             for (int i = 1; i <= depth; i++)
             {
@@ -320,7 +320,7 @@ namespace NLua
                     strrep = obj.ToString();
                 }
 
-                Debug.WriteLine("{0}: ({1}) {2}", i, typestr, strrep);
+                Debug.WriteLine($"{i}: ({typestr}) {strrep}");
             }
         }
 

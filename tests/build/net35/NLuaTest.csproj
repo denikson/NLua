@@ -52,13 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\build\net45\NLua.csproj">
-      <Project>{c45805a8-6436-4738-bd9f-4632eea63bbc}</Project>
-      <Name>NLua</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\..\..\build\net35\NLua.csproj">
+      <Project>{d5b6902e-37cd-44db-8ac5-bfaeee663633}</Project>
+      <Name>NLua</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\src\NLuaTest.Shared.projitems" Label="Shared" />
   <Import Project="..\..\src\NLuaTest.Shared.Scripts.projitems" Label="Shared" />

@@ -1,0 +1,7 @@
+D:\Projects\C#\Generic\NLua\build\net35\obj\Debug\NLua.csprojAssemblyReference.cache
+D:\Projects\C#\Generic\NLua\build\net35\obj\Debug\NLua.csproj.CoreCompileInputs.cache
+D:\Projects\C#\Generic\NLua\lib\Debug\net35\NLua.dll
+D:\Projects\C#\Generic\NLua\lib\Debug\net35\NLua.pdb
+D:\Projects\C#\Generic\NLua\build\net35\obj\Debug\NLua.csproj.CopyComplete
+D:\Projects\C#\Generic\NLua\build\net35\obj\Debug\NLua.dll
+D:\Projects\C#\Generic\NLua\build\net35\obj\Debug\NLua.pdb
