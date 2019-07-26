@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,7 +10,7 @@ namespace NLua.Extensions
     {
         public static bool HasMethod(this Type t, string name)
         {
-            var op = t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            var op = t.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
             return op.Any(m => m.Name == name);
         }
 
@@ -59,7 +59,7 @@ namespace NLua.Extensions
             if (t.IsPrimitive)
                 return true;
             // Unary - will always have only one version.
-            var op = t.GetMethod("op_UnaryNegation", BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            var op = t.GetMethod("op_UnaryNegation", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
             return op != null;
         }
 
@@ -107,7 +107,7 @@ namespace NLua.Extensions
             }
 
             var query = types
-                .SelectMany(extensionType => extensionType.GetMethods(name, BindingFlags.Static | BindingFlags.Public),
+                .SelectMany(extensionType => extensionType.GetMethods(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic),
                     (extensionType, method) => new {extensionType, method})
                 .Where(t => t.method.IsDefined(typeof(ExtensionAttribute), false))
                 .Where(t =>

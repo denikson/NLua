@@ -22,7 +22,7 @@ namespace NLua
                 throw new ArgumentNullException(nameof(o));
             #endregion
 
-            foreach (var method in o.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public))
+            foreach (var method in o.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 foreach (LuaGlobalAttribute attribute in method.GetCustomAttributes(typeof(LuaGlobalAttribute), true))
                 {
@@ -54,7 +54,7 @@ namespace NLua
                 throw new ArgumentException("The type must be a class!", nameof(type));
             #endregion
 
-            foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public))
+            foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 foreach (LuaGlobalAttribute attribute in method.GetCustomAttributes(typeof(LuaGlobalAttribute), false))
                 {

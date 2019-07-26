@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +69,7 @@ namespace NLua.Method
             _isStatic = (bindingType & BindingFlags.Static) == BindingFlags.Static;
             _members = GetMethodsRecursively(targetType.UnderlyingSystemType,
                 methodName,
-                bindingType | BindingFlags.Public);
+                bindingType | BindingFlags.Public | BindingFlags.NonPublic);
         }
 
         MethodInfo[] GetMethodsRecursively(Type type, string methodName, BindingFlags bindingType)

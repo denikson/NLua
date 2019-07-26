@@ -549,7 +549,7 @@ namespace NLua
             if (cachedMember != null)
                 return true;
 
-            var members = objType.GetMember(methodName, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public);
+            var members = objType.GetMember(methodName, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             return members.Length > 0;
         }
 
@@ -613,14 +613,14 @@ namespace NLua
                 member = (MemberInfo)cachedMember;
             else
             {
-                var members = objType.GetMember(methodName, bindingType | BindingFlags.Public);
+                var members = objType.GetMember(methodName, bindingType | BindingFlags.Public | BindingFlags.NonPublic);
 
                 if (members.Length > 0)
                     member = members[0];
                 else
                 {
                     // If we can't find any suitable instance members, try to find them as statics - but we only want to allow implicit static
-                    members = objType.GetMember(methodName, bindingType | BindingFlags.Static | BindingFlags.Public);
+                    members = objType.GetMember(methodName, bindingType | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 
                     if (members.Length > 0)
                     {
@@ -903,7 +903,7 @@ namespace NLua
             var member = (MemberInfo)CheckMemberCache(targetType, fieldName);
             if (member == null)
             {
-                var members = targetType.GetMember(fieldName, bindingType | BindingFlags.Public);
+                var members = targetType.GetMember(fieldName, bindingType | BindingFlags.Public | BindingFlags.NonPublic);
 
                 if (members.Length <= 0)
                 {
@@ -1214,7 +1214,7 @@ namespace NLua
             }
 
             Type type = target.GetType();
-            var operators = type.GetMethods(operation, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            var operators = type.GetMethods(operation, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 
             foreach (var op in operators)
             {

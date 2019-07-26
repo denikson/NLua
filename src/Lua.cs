@@ -634,7 +634,7 @@ namespace NLua
             else if ((type.IsClass || type.IsInterface) && type != typeof(string) && recursionCounter < 2)
             {
                 #region Methods
-                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
                 {
                     string name = method.Name;
                     if (
@@ -661,7 +661,7 @@ namespace NLua
                 #endregion
 
                 #region Fields
-                foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Instance))
+                foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                 {
                     if (
                         // Check that the LuaHideAttribute and LuaGlobalAttribute were not applied
@@ -675,7 +675,7 @@ namespace NLua
                 #endregion
 
                 #region Properties
-                foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
                 {
                     if (
                         // Check that the LuaHideAttribute and LuaGlobalAttribute were not applied

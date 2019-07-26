@@ -528,7 +528,7 @@ namespace NLua
 
             try
             {
-                var method = klass.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static |
+                var method = klass.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static |
                     BindingFlags.Instance, signature);
                 var wrapper = new LuaMethodWrapper(this, target, klass, method);
                 LuaNativeFunction invokeDelegate = wrapper.InvokeFunction;
